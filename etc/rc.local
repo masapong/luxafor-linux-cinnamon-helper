@@ -1,0 +1,11 @@
+dbus-monitor --session "type='signal',interface='org.cinnamon.ScreenSaver', member='ActiveChanged'" | \ 
+(
+  while true; do
+    read X
+    if echo $X | grep "true" &> /dev/null; then
+      python /path/to/luxafor.py color;
+    elif echo $X | grep "false" &> /dev/null; then
+      python /path/to/luxafor.py color -l 0 -r 10 -g 255 -b 25; 
+    fi  
+  done
+)&
